@@ -7,8 +7,8 @@ import (
 
 // WordList is the definition of WordList component
 type WordList struct {
-	List         *termui.List
-	Offset       int // from what offset are channels rendered
+	List *termui.List
+	// Offset       int // from what offset are channels rendered
 	SelectedWord int // position of the highlighted word
 }
 
@@ -18,17 +18,17 @@ func CreateWordList(flashcards *[]config.Flashcard, optionsHeight int) *WordList
 	list := termui.NewList()
 	list.Items = wordList
 	list.BorderLabel = "Flashcards"
-	list.Height = 43
 	list.Height = termui.TermHeight() - optionsHeight
 	return &WordList{
-		List: list,
+		List:         list,
+		SelectedWord: list.InnerBounds().Min.Y,
 	}
 }
 
 // Buffer implements interface termui.Bufferer
 func (w *WordList) Buffer() termui.Buffer {
 	buf := w.List.Buffer()
-	for i, item := range w.List.Items[w.Offset:] {
+	for i, item := range w.List.Items {
 
 		y := w.List.InnerBounds().Min.Y + i
 
@@ -81,25 +81,21 @@ func (w *WordList) Buffer() termui.Buffer {
 }
 
 // ScrollUp enables us to scroll through the word list when it overflows
-func (w *WordList) ScrollUp() {
-	if w.SelectedWord == w.List.InnerBounds().Min.Y {
-		if w.Offset > 0 {
-			w.Offset--
-		}
-	} else {
+func (w *WordList) ScrollUp() (change bool) {
+	if w.SelectedWord != w.List.InnerBounds().Min.Y {
 		w.SelectedWord--
+		return true
 	}
+	return
 }
 
 // ScrollDown enables us to scroll through the word list when it overflows
-func (w *WordList) ScrollDown() {
-	if w.SelectedWord == w.List.InnerBounds().Max.Y-1 {
-		if w.Offset < len(w.List.Items)-1 {
-			w.Offset++
-		}
-	} else {
+func (w *WordList) ScrollDown() (change bool) {
+	if w.SelectedWord != len(w.List.Items) {
 		w.SelectedWord++
+		return true
 	}
+	return
 }
 
 // GetHeight implements interface termui.GridBufferer
@@ -123,7 +119,7 @@ func (w *WordList) SetY(y int) {
 }
 
 func getNames(wordList []config.Flashcard) []string {
-	words := make([]string, len(wordList))
+	words := make([]string, 0)
 	for i := 0; i < len(wordList); i++ {
 		words = append(words, wordList[i].Name)
 	}

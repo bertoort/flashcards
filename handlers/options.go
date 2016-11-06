@@ -13,8 +13,8 @@ import (
 var actionMap = map[string]func(*context.AppContext){
 	"q": actionQuit,
 	"f": actionFlip,
-	"j": actionScrollUp,
-	"k": actionScrollDown,
+	"k": actionScrollUp,
+	"j": actionScrollDown,
 }
 
 func RegisterEventHandlers(ctx *context.AppContext) {
@@ -44,8 +44,6 @@ func resizeHandler(ctx *context.AppContext) func(termui.Event) {
 	}
 }
 
-// TODO: resize only seems to work for width and resizing it too small
-// will cause termui to panic
 func actionResize(ctx *context.AppContext) {
 	termui.Body.Width = termui.TermWidth()
 	termui.Body.Align()
@@ -62,13 +60,17 @@ func actionFlip(ctx *context.AppContext) {
 }
 
 func actionScrollUp(ctx *context.AppContext) {
-	ctx.View.WordList.ScrollUp()
-	termui.Render(ctx.View.WordList)
+	change := ctx.View.WordList.ScrollUp()
+	if change {
+		termui.Render(ctx.View.WordList)
+	}
 }
 
 func actionScrollDown(ctx *context.AppContext) {
-	ctx.View.WordList.ScrollDown()
-	termui.Render(ctx.View.WordList)
+	change := ctx.View.WordList.ScrollDown()
+	if change {
+		termui.Render(ctx.View.WordList)
+	}
 }
 
 // func actionGetMessages(ctx *context.AppContext) {

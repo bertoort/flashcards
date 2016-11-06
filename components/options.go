@@ -12,8 +12,8 @@ func CreateOptions(height int) *Options {
 	options := []string{
 		"[q]quit",
 		"[f]flip",
-		"[j]up",
-		"[k]down",
+		"[k]up",
+		"[j]down",
 	}
 	var text string
 	spacing := " "
