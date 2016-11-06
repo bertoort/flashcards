@@ -35,6 +35,14 @@ func (f *Flashcard) Flip() {
 	f.displayDefinition = !f.displayDefinition
 }
 
+// Change displays the currently selected word
+func (f *Flashcard) Change(flashcard *config.Flashcard) {
+	f.Par.Text = flashcard.Name
+	f.name = flashcard.Name
+	f.definition = flashcard.Definition
+	f.displayDefinition = true
+}
+
 // Buffer implements interface termui.Bufferer
 func (f *Flashcard) Buffer() termui.Buffer {
 	buf := f.Par.Buffer()

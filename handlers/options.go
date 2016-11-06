@@ -15,6 +15,7 @@ var actionMap = map[string]func(*context.AppContext){
 	"f": actionFlip,
 	"k": actionScrollUp,
 	"j": actionScrollDown,
+	"s": actionSelect,
 }
 
 func RegisterEventHandlers(ctx *context.AppContext) {
@@ -73,74 +74,10 @@ func actionScrollDown(ctx *context.AppContext) {
 	}
 }
 
-// func actionGetMessages(ctx *context.AppContext) {
-//   ctx.View.Chat.GetMessages(
-//     ctx.Service,
-//     ctx.Service.Channels[ctx.View.Channels.SelectedChannel],
-//   )
-//
-//   termui.Render(ctx.View.Chat)
-// }
-//
-// func actionMoveCursorUpWords(ctx *context.AppContext) {
-//   ctx.View.Channels.MoveCursorUp()
-//   termui.Render(ctx.View.Channels)
-//   actionChangeChannel(ctx)
-// }
-//
-// func actionMoveCursorDownChannels(ctx *context.AppContext) {
-//   go func() {
-//     if timer != nil {
-//       timer.Stop()
-//     }
-//
-//     ctx.View.Channels.MoveCursorDown()
-//     termui.Render(ctx.View.Channels)
-//
-//     timer = time.NewTimer(time.Second / 4)
-//     <-timer.C
-//
-//     actionChangeChannel(ctx)
-//   }()
-// }
-//
-// func actionMoveCursorTopChannels(ctx *context.AppContext) {
-//   ctx.View.Channels.MoveCursorTop()
-//   actionChangeChannel(ctx)
-// }
-//
-// func actionMoveCursorBottomChannels(ctx *context.AppContext) {
-//   ctx.View.Channels.MoveCursorBottom()
-//   actionChangeChannel(ctx)
-// }
-//
-// func actionChangeChannel(ctx *context.AppContext) {
-//   // Clear messages from Chat pane
-//   ctx.View.Chat.ClearMessages()
-//
-//   // Get message for the new channel
-//   ctx.View.Chat.GetMessages(
-//     ctx.Service,
-//     ctx.Service.SlackChannels[ctx.View.Channels.SelectedChannel],
-//   )
-//
-//   // Set channel name for the Chat pane
-//   ctx.View.Chat.SetBorderLabel(
-//     ctx.Service.Channels[ctx.View.Channels.SelectedChannel],
-//   )
-//
-//   // Set read mark
-//   ctx.View.Channels.SetReadMark(ctx.Service)
-//
-//   termui.Render(ctx.View.Channels)
-//   termui.Render(ctx.View.Chat)
-// }
-//
-// func actionNewMessage(ctx *context.AppContext, channelID string) {
-//   ctx.View.Channels.NewMessage(ctx.Service, channelID)
-//   termui.Render(ctx.View.Channels)
-// }
-//
+func actionSelect(ctx *context.AppContext) {
+	ctx.View.UpdateFlashcard()
+	termui.Render(ctx.View.Flashcard)
+}
 
 // See:
 // - https://github.com/gizak/termui/blob/a7e3aeef4cdf9fa2edb723b1541cb69b7bb089ea/events.go#L31-L72

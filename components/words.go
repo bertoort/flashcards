@@ -7,8 +7,7 @@ import (
 
 // WordList is the definition of WordList component
 type WordList struct {
-	List *termui.List
-	// Offset       int // from what offset are channels rendered
+	List         *termui.List
 	SelectedWord int // position of the highlighted word
 }
 
