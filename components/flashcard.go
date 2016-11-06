@@ -38,6 +38,7 @@ func (f *Flashcard) Flip() {
 // Change displays the currently selected word
 func (f *Flashcard) Change(flashcard *config.Flashcard) {
 	f.Par.Text = flashcard.Name
+	f.Par.BorderLabel = "Term"
 	f.name = flashcard.Name
 	f.definition = flashcard.Definition
 	f.displayDefinition = true

@@ -11,11 +11,13 @@ import (
 
 // actionMap binds specific action names to the function counterparts
 var actionMap = map[string]func(*context.AppContext){
-	"q": actionQuit,
-	"f": actionFlip,
-	"k": actionScrollUp,
-	"j": actionScrollDown,
-	"s": actionSelect,
+	"q":        actionQuit,
+	"<escape>": actionQuit,
+	"f":        actionFlip,
+	"k":        actionScrollUp,
+	"j":        actionScrollDown,
+	"s":        actionSelect,
+	"<enter>":  actionSelect,
 }
 
 func RegisterEventHandlers(ctx *context.AppContext) {
