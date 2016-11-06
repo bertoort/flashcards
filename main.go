@@ -71,11 +71,11 @@ func main() {
 	// setup body
 	termui.Body.AddRows(
 		termui.NewRow(
-			termui.NewCol(2, 0, ctx.View.WordList.List),
-			termui.NewCol(10, 0, ctx.View.Flashcard.Par),
+			termui.NewCol(2, 0, ctx.View.WordList),
+			termui.NewCol(10, 0, ctx.View.Flashcard),
 		),
 		termui.NewRow(
-			termui.NewCol(12, 0, ctx.View.Options.Par),
+			termui.NewCol(12, 0, ctx.View.Options),
 		),
 	)
 	termui.Body.Align()

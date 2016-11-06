@@ -9,12 +9,14 @@ import (
 
 const optionsHeight = 3
 
+// View holds the application components
 type View struct {
 	Flashcard *components.Flashcard
 	Options   *components.Options
 	WordList  *components.WordList
 }
 
+// CreateFlashcardView creates a new application view
 func CreateFlashcardView(config *config.Config, index int) *View {
 	flashcard := components.CreateFlashcard(&config.Flashcards[index], optionsHeight)
 	options := components.CreateOptions(optionsHeight)
@@ -29,10 +31,11 @@ func CreateFlashcardView(config *config.Config, index int) *View {
 	return view
 }
 
+// Refresh re-renderse the components
 func (v *View) Refresh() {
 	termui.Render(
-		v.Flashcard.Par,
-		v.WordList.List,
-		v.Options.Par,
+		v.Flashcard,
+		v.WordList,
+		v.Options,
 	)
 }

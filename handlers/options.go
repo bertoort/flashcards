@@ -13,10 +13,8 @@ import (
 var actionMap = map[string]func(*context.AppContext){
 	"q": actionQuit,
 	"f": actionFlip,
-	// "channel-up":     actionMoveCursorUpChannels,
-	// "channel-down":   actionMoveCursorDownChannels,
-	// "channel-top":    actionMoveCursorTopChannels,
-	// "channel-bottom": actionMoveCursorBottomChannels,
+	"j": actionScrollUp,
+	"k": actionScrollDown,
 }
 
 func RegisterEventHandlers(ctx *context.AppContext) {
@@ -60,7 +58,17 @@ func actionQuit(*context.AppContext) {
 
 func actionFlip(ctx *context.AppContext) {
 	ctx.View.Flashcard.Flip()
-	termui.Render(ctx.View.Flashcard.Par)
+	termui.Render(ctx.View.Flashcard)
+}
+
+func actionScrollUp(ctx *context.AppContext) {
+	ctx.View.WordList.ScrollUp()
+	termui.Render(ctx.View.WordList)
+}
+
+func actionScrollDown(ctx *context.AppContext) {
+	ctx.View.WordList.ScrollDown()
+	termui.Render(ctx.View.WordList)
 }
 
 // func actionGetMessages(ctx *context.AppContext) {
