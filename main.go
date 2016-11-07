@@ -14,17 +14,18 @@ import (
 
 const (
 	VERSION = "v0.0.1"
-	USAGE   = `NAME:
+	USAGE   = `Name:
     flashcards - flashcards for your terminal
 
-USAGE:
+Usage:
     flashcards
 
-VERSION:
+Version:
     %s
 
-GLOBAL OPTIONS:
+Global Options:
    --help, -h
+   --config, -c
 `
 )
 
@@ -46,6 +47,13 @@ func init() {
 		"config",
 		path.Join(usr.HomeDir, ".flashcards.json"),
 		"location of config file",
+	)
+
+	flag.StringVar(
+		&flgConfig,
+		"c",
+		path.Join(usr.HomeDir, ".flashcards.json"),
+		"shorthand for location of config file",
 	)
 
 	flag.Usage = func() {

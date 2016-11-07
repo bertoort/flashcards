@@ -8,6 +8,7 @@ import (
 // WordList is the definition of WordList component
 type WordList struct {
 	List         *termui.List
+	Offset       int // starting point for scrolling
 	SelectedWord int // position of the highlighted word
 }
 
@@ -21,13 +22,14 @@ func CreateWordList(flashcards *[]config.Flashcard, optionsHeight int) *WordList
 	return &WordList{
 		List:         list,
 		SelectedWord: list.InnerBounds().Min.Y,
+		Offset:       0,
 	}
 }
 
 // Buffer implements interface termui.Bufferer
 func (w *WordList) Buffer() termui.Buffer {
 	buf := w.List.Buffer()
-	for i, item := range w.List.Items {
+	for i, item := range w.List.Items[w.Offset:] {
 
 		y := w.List.InnerBounds().Min.Y + i
 
@@ -83,16 +85,28 @@ func (w *WordList) Buffer() termui.Buffer {
 func (w *WordList) ScrollUp() (change bool) {
 	if w.SelectedWord != w.List.InnerBounds().Min.Y {
 		w.SelectedWord--
-		return true
+		change = true
+	} else {
+		if w.Offset > 0 {
+			w.Offset--
+			change = true
+		}
 	}
 	return
 }
 
 // ScrollDown enables us to scroll through the word list when it overflows
 func (w *WordList) ScrollDown() (change bool) {
-	if w.SelectedWord != len(w.List.Items) {
-		w.SelectedWord++
-		return true
+	if w.SelectedWord < len(w.List.Items) {
+		if w.SelectedWord == w.List.InnerBounds().Max.Y-1 {
+			if w.Offset < len(w.List.Items)-1 {
+				w.Offset++
+				change = true
+			}
+		} else {
+			w.SelectedWord++
+			change = true
+		}
 	}
 	return
 }
