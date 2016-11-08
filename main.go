@@ -7,6 +7,7 @@ import (
 	"os/user"
 	"path"
 
+	"github.com/berto/flashcards/cmd"
 	"github.com/berto/flashcards/context"
 	"github.com/berto/flashcards/handlers"
 	"github.com/gizak/termui"
@@ -18,7 +19,7 @@ const (
     flashcards - flashcards for your terminal
 
 Usage:
-    flashcards
+    flashcards [-options] [word]
 
 Version:
     %s
@@ -30,8 +31,8 @@ Global Options:
 )
 
 var (
-	flgConfig string
-	flgUsage  bool
+	configPath string
+	word       *string
 )
 
 func init() {
@@ -43,14 +44,14 @@ func init() {
 
 	// Parse flags
 	flag.StringVar(
-		&flgConfig,
+		&configPath,
 		"config",
 		path.Join(usr.HomeDir, ".flashcards.json"),
 		"location of config file",
 	)
 
 	flag.StringVar(
-		&flgConfig,
+		&configPath,
 		"c",
 		path.Join(usr.HomeDir, ".flashcards.json"),
 		"shorthand for location of config file",
@@ -61,9 +62,17 @@ func init() {
 	}
 
 	flag.Parse()
+
+	if len(flag.Args()) > 0 {
+		word = &flag.Args()[0]
+	}
 }
 
 func main() {
+	if word != nil {
+		commands.Define(&configPath, word)
+	}
+
 	// start terminal user interface
 	err := termui.Init()
 	if err != nil {
@@ -71,10 +80,8 @@ func main() {
 	}
 	defer termui.Close()
 
-	random := false
-
 	// create context
-	ctx := context.CreateAppContext(&flgConfig, &random)
+	ctx := context.CreateAppContext(&configPath)
 
 	// setup body
 	termui.Body.AddRows(

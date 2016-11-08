@@ -18,8 +18,8 @@ type View struct {
 }
 
 // CreateFlashcardView creates a new application view
-func CreateFlashcardView(config *config.Config, index int) *View {
-	flashcard := components.CreateFlashcard(&config.Flashcards[index], optionsHeight)
+func CreateFlashcardView(config *config.Config) *View {
+	flashcard := components.CreateFlashcard(&config.Flashcards[0], optionsHeight)
 	options := components.CreateOptions(optionsHeight)
 	wordList := components.CreateWordList(&config.Flashcards, optionsHeight)
 

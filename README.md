@@ -46,6 +46,6 @@ Getting started
     ```bash
     $ flashcards 
 
-    // or specify the location of the config file
-    $ flashcards -c=[path-to-config-file]
+    // for list of comands and usage
+    $ flashcards -h
     ``` 
