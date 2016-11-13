@@ -1,0 +1,43 @@
+{
+	"comment": "",
+	"ignore": "test",
+	"package": [
+		{
+			"checksumSHA1": "Xc0uvK8DeX2AEysOiNht4CwhZ8M=",
+			"path": "github.com/gizak/termui",
+			"revision": "cfe1ea3b97685430abe580d4ecd7a463d14397c0",
+			"revisionTime": "2016-11-11T04:25:53Z"
+		},
+		{
+			"checksumSHA1": "7hln62oZPZmyqEmgXaybf9WxQ7A=",
+			"path": "github.com/maruel/panicparse/stack",
+			"revision": "ad661195ed0e88491e0f14be6613304e3b1141d6",
+			"revisionTime": "2016-07-20T14:16:34Z"
+		},
+		{
+			"checksumSHA1": "yf185lmVPcvXjLZuPT1s4JzxI18=",
+			"path": "github.com/mattn/go-runewidth",
+			"revision": "737072b4e32b7a5018b4a7125da8d12de90e8045",
+			"revisionTime": "2016-10-12T01:35:12Z"
+		},
+		{
+			"checksumSHA1": "L3leymg2RT8hFl5uL+5KP/LpBkg=",
+			"path": "github.com/mitchellh/go-wordwrap",
+			"revision": "ad45545899c7b13c020ea92b2072220eefad42b8",
+			"revisionTime": "2015-03-14T17:03:34Z"
+		},
+		{
+			"checksumSHA1": "pqTEAm1W2tlmdHJ6b/J0no+cfso=",
+			"path": "github.com/nsf/termbox-go",
+			"revision": "b6acae516ace002cb8105a89024544a1480655a5",
+			"revisionTime": "2016-09-13T19:16:50Z"
+		},
+		{
+			"checksumSHA1": "pdlyXWz3vDHyi1snbC6gMbd0RCA=",
+			"path": "github.com/sajari/fuzzy",
+			"revision": "243c923763cac789d1196949a834ca698dbd7a28",
+			"revisionTime": "2016-05-23T05:48:59Z"
+		}
+	],
+	"rootPath": "github.com/berto/flashcards"
+}
