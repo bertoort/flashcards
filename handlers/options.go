@@ -16,6 +16,8 @@ var actionMap = map[string]func(*context.AppContext){
 	"f":        actionFlip,
 	"k":        actionScrollUp,
 	"j":        actionScrollDown,
+	"K":        actionScrollTop,
+	"J":        actionScrollBottom,
 	"s":        actionSelect,
 	"<enter>":  actionSelect,
 }
@@ -67,6 +69,16 @@ func actionScrollUp(ctx *context.AppContext) {
 	if change {
 		termui.Render(ctx.View.WordList)
 	}
+}
+
+func actionScrollTop(ctx *context.AppContext) {
+	ctx.View.WordList.ScrollTop()
+	termui.Render(ctx.View.WordList)
+}
+
+func actionScrollBottom(ctx *context.AppContext) {
+	ctx.View.WordList.ScrollBottom()
+	termui.Render(ctx.View.WordList)
 }
 
 func actionScrollDown(ctx *context.AppContext) {

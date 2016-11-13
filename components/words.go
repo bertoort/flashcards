@@ -111,6 +111,24 @@ func (w *WordList) ScrollDown() (change bool) {
 	return
 }
 
+// ScrollTop will move the cursor to the top of the list
+func (w *WordList) ScrollTop() {
+		w.SelectedWord = w.List.InnerBounds().Min.Y
+		w.Offset = 0
+}
+
+// ScrollBottom will move the cursor to the bottom of the list
+func (w *WordList) ScrollBottom() {
+	w.SelectedWord = (len(w.List.Items))
+
+	offset := len(w.List.Items) - (w.List.InnerBounds().Max.Y - 1)
+	w.Offset = offset
+
+	if offset < 0 {
+		w.Offset = 0
+	} 
+}
+
 // GetHeight implements interface termui.GridBufferer
 func (w *WordList) GetHeight() int {
 	return w.List.Block.GetHeight()
