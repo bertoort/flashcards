@@ -30,7 +30,7 @@ Getting started
    For a quick start, copy the one in the assets folder:
 
     ```bash
-    $ wget https://github.com/berto/flashcards/assets/.flashcards.json
+    $ wget https://raw.githubusercontent.com/berto/flashcards/master/assets/.flashcards.json
     $ mv .flashcards.json ~/
     ``` 
 
