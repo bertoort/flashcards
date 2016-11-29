@@ -8,15 +8,33 @@ Getting started
 ---------------
 
 1. [Download](https://github.com/berto/flashcards/releases) and place where you can access it from
-   the command line like, `/usr/local/bin` Or
-   get it via Go:
+   the command line like, `/usr/local/bin` 
+
+   Or use wget
+
+    ```bash
+    $ brew install wget
+    $ wget https://github.com/berto/flashcards/releases/download/0.0.1/flashcards
+    $ chmod u+x flashcards
+    $ mv flashcards /usr/local/bin
+    ```
+
+   Or via Go:
 
     ```bash
     $ go get github.com/berto/flashcards   
     ```
  
-2. Create a `.flashcards.json` file, place it in your home directory. The file
-   should resemble the following structure:
+2. Create a `.flashcards.json` file, place it in your home directory. 
+
+   For a quick start, copy the one in the assets folder:
+
+    ```bash
+    $ wget https://github.com/berto/flashcards/assets/.flashcards.json
+    $ mv .flashcards.json ~/
+    ``` 
+
+   The file should resemble the following structure:
 
     ```javascript
     {
